@@ -9,7 +9,7 @@
 <div id="my_page" style="margin-top:40px;background-color:#ffffff;">
     <div class="row">
         <div class="span12 b1">
-            <h2>RESTful service tester</h2>
+            <h2 style="padding:10px;">RESTful service tester</h2>
         </div>
     </div>
 
@@ -23,10 +23,10 @@
             </div>
             <br>
             <div>
-                <%= f.label :server, "server (example: http://localhost:3000)", {class: "form1_label"} %>
+                <%= f.label :server, "server (example: 'http://localhost:3000')", {class: "form1_label"} %>
                 <%= f.text_field :server %>
             </div><div>
-                <%= f.label :resource, "resource to test (example: 'subscriptions')", {class: "form1_label"}  %>
+                <%= f.label :resource, "resource to test (example: '/subscriptions')", {class: "form1_label"}  %>
                 <%= f.text_field :resource%>
             </div><div>
                 <%= f.label :test_method, "method to test", {class: "form1_label"}  %>
@@ -45,6 +45,9 @@
             <%= form_tag %>
                 <%= label_tag :test_response, "response", {class: "form1_label"}  %>
                 <%= text_area_tag "response", @test_response[:response_text], {rows: 15} %>
+                <br>
+                <%= label_tag "status", "status", {class: "form1_label"} %>
+                <%= label_tag @test_response[:status] %>
                 <br>
                 <%= submit_tag "Clear", class: "btn" %>
             </fieldset>

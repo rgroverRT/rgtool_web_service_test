@@ -12,7 +12,8 @@ ToolWebServiceTester::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-    resources :web_service_tests
+    resources :web_service_tests, :test_responses
+
 
   # Sample resource route with options:
   #   resources :products do
