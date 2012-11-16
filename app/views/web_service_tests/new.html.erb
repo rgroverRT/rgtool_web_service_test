@@ -2,14 +2,14 @@
   /*.b1 {background-color: #ffddff;}*/
   /*.b2 {background-color: #ddffff;}*/
   /*.b3 {background-color: #ffffdd;}*/
-  .form1 {padding:20px;}
+
   .form1_label {font-weight:bold; padding-right:6px;}
 
   /* NOTE:  Bootstrap is goofing up the text_area_tag "cols" with it's "content" def */
 </style>
 
 
-<div id="my_page" style="margin-top:40px;background-color:#ffffff;">
+<div id="wst_form">
 
     <div class="row">
         <div class="span12 b1">
@@ -21,7 +21,7 @@
 
     <%= form_for @web_service_test do |f| %>
 
-    <div class="row form1">
+    <div id="form1" class="row">
         <div class="span5 b2">
             <fieldset><legend>request</legend>
             <div>
