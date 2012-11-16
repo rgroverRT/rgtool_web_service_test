@@ -3,7 +3,7 @@
   /*.b2 {background-color: #ddffff;}*/
   /*.b3 {background-color: #ffffdd;}*/
   .form1 {padding:20px;}
-  .form1_label {font-weight:bold;}
+  .form1_label {font-weight:bold; padding-right:6px;}
 
   /* NOTE:  Bootstrap is goofing up the text_area_tag "cols" with it's "content" def */
 </style>
@@ -20,7 +20,7 @@
     <%= form_for @web_service_test do |f| %>
 
     <div class="row form1">
-        <div class="span5 b2" style="">
+        <div class="span5 b2">
             <fieldset><legend>request</legend>
 
             <div>
@@ -39,8 +39,10 @@
                 <%= f.collection_select(:test_method, @test_method_list, :to_s, :to_s) %>
             </div><div>
                 <%= f.label :mime_type, "mime type", {class: "form1_label"}  %>
-                <%= f.collection_select(:mime_type, @mime_type_list, :to_s, :to_s) %>
+                <%= f.radio_button :mime_type, "xml", checked: true %>xml&nbsp;&nbsp;
+                <%= f.radio_button :mime_type, "json" %>json
             </div>
+            <br>
             <div class="pull-left" style="line-height:2em;padding-right:10px;">
                 <%= check_box_tag :db_save, nil, false %>
             </div>
@@ -51,20 +53,23 @@
             <%= f.submit "Run Test", class: "btn btn-primary" %>
             </fieldset>
         </div>
+
         <div class="span6 b3">
             <fieldset><legend>response</legend>
                 <%= label_tag :test_response, "response", {class: "form1_label"}  %>
-                <%= text_area_tag "test_response_text", @test_response[:response_text], { style: "width:400px;", rows: 18, escape: "false"} %><!--overflow:hidden;-->
+                <%= text_area_tag "test_response_text", @test_response[:response_text], { style: "width:400px;", rows: 15, escape: "false"} %><!--overflow:hidden;-->
                 <br>
-                <%= label_tag "status", "status", {class: "form1_label"} %>
-                <%= label_tag @test_response[:status] %>
-                <br>
-                <%= submit_tag "Clear", onclick: "return clear_response();", class: "btn" %>
+                <div class="pull-left">
+                    <%= label_tag "status", "status:", {class: "form1_label"} %>
+                </div>
+                <div>
+                    <%= label_tag @test_response[:status] %>
+                    <%= submit_tag "Clear", onclick: "return clear_response();", class: "btn" %>
+                </div>
             </fieldset>
         </div>
-    </div>
-
-    <% end %>
+        </div><!-- first big row -->
+    <% end # of the form %>
 
     <script>
     function clear_response() {

@@ -41,19 +41,10 @@ class WebServiceTestsController < ApplicationController
             wst.save
         end
 
-        #@test_response = session[:test_response] ||= {response_text: "will go here ..."}
-
-        #@web_service_test = wst
-
-        # update some of the fields
-        #@web_service_test.name = "WST-" + DateTime::now.strftime("%I:%M:%S %p")
-
-        # set up the select lists
-        #@test_method_list = ["-- Select a method to test --", "GET", "PUT"]
-        #@mime_type_list = ["-- Select a mime type --", "XML", "JSON"]
-
-        # Can't do this, it forces a call to the 'update' method in the controller *iff* the database was written
+        # If we did this direct render call, we would have to set up all the default form values;  BUT!
+        # We can't do this, as it forces a call to the 'update' method in the controller *iff* the database was written
         # render 'new'
+        #
         redirect_to new_web_service_test_path()
     end
 
@@ -62,12 +53,12 @@ class WebServiceTestsController < ApplicationController
         #
         def make_request(in_web_service_test)
 
-            #c reate the target URI
+            # create the target URI
             #
             case in_web_service_test.mime_type
-                when 'JSON'
+                when "json"
                     suffix = '.json'
-                when 'XML'
+                when "xml"
                     suffix = '.xml'
                 else
                     raise ArgumentError, "select a supported mime type"
@@ -81,11 +72,16 @@ class WebServiceTestsController < ApplicationController
                     req = Net::HTTP::Get.new(url.path)
                 when 'POST'
                     raise ArgumentError, "POST not supported"
+                    # TODO need text input for the POST (or PUT) payload
                 else
                     raise ArgumentError, "select a supported method to test"
             end
 
             # DA CALL!!
+            # doc note: When called with a block, passes an HTTPResponse object to the block.
+            # The body of the response will not have been read yet;
+            # the block can process it using Net::HTTPResponse#read_body, if desired.
+            #
             res = Net::HTTP.start(url.host, url.port) { |http|
                 http.request(req)
             }
