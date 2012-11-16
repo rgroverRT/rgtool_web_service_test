@@ -12,40 +12,46 @@ class WebServiceTestsController < ApplicationController
         @web_service_test.name = "WST-" + DateTime::now.strftime("%I:%M:%S %p")
 
         @web_service_test.test_method = "-- Select a method to test --"
-        @web_service_test.mime_type = "-- Select a mime type --"
         @web_service_test.server = DEFAULT_SERVER
         @web_service_test.resource = '/subscriptions/oldest'
 
         @test_method_list = ["-- Select a method to test --", "GET", "PUT"]
-        @mime_type_list = ["-- Select a mime type --", "XML", "JSON"]
 
         @test_response = session[:test_response] ||= {response_text: "will go here ..."}
     end
 
     def create
         logger.debug("'create' method called in #{self.controller_name}")
-        wst = WebServiceTest.new(params[:web_service_test])
+        #wst = WebServiceTest.new(params[:web_service_test])
+        @web_service_test = WebServiceTest.new(params[:web_service_test])
 
-        # HERE IT IS, the CALL!!
-        test_response = make_request(wst)
+        if @web_service_test.valid?
+            # HERE IT IS, the CALL!!
+            test_response = make_request(@web_service_test)
 
-        # Pass it across the redirect - TODO:  figure if there's another way
-        session[:test_response] = test_response
-        #{response_text: DateTime::now.seconds_since_midnight.to_s + ":  hard-coded response;  would send, recieve, and update this text ..."}
+            # Pass it across the redirect - TODO:  figure if there's another way
+            session[:test_response] = test_response
+            #{response_text: DateTime::now.seconds_since_midnight.to_s + ":  hard-coded response;  would send, recieve, and update this text ..."}
 
-        wst.status = test_response.status
+            @web_service_test.status = test_response.status
 
-        if params[:db_save] == "on"
-            logger.debug("saving this WST:  " + wst.to_s)
-            # NOTE:  if saved, form wants to "PUT" next request, so need "UPDATE" method, yada yada
-            wst.save
+            if params[:db_save] == "on"
+                logger.debug("saving this WST:  " + @web_service_test.to_s)
+                # NOTE:  if saved, form wants to "PUT" next request, so need "UPDATE" method, yada yada
+                @web_service_test.save
+            end
+
+            redirect_to new_web_service_test_path()
+        else
+            #@web_service_test.name = "WST-" + DateTime::now.strftime("%I:%M:%S %p")
+            #@web_service_test.test_method = "-- Select a method to test --"
+            @test_method_list = ["-- Select a method to test --", "GET", "PUT"]
+            @test_response = session[:test_response] ||= {response_text: "will go here ..."}
+
+            # If we did this direct render call, we would have to set up all the default form values;  BUT!
+            # We can't do this, as it forces a call to the 'update' method in the controller *iff* the database was written
+            render 'new'
         end
-
-        # If we did this direct render call, we would have to set up all the default form values;  BUT!
-        # We can't do this, as it forces a call to the 'update' method in the controller *iff* the database was written
-        # render 'new'
-        #
-        redirect_to new_web_service_test_path()
     end
 
     private
@@ -77,7 +83,6 @@ class WebServiceTestsController < ApplicationController
                     raise ArgumentError, "select a supported method to test"
             end
 
-            # DA CALL!!
             # doc note: When called with a block, passes an HTTPResponse object to the block.
             # The body of the response will not have been read yet;
             # the block can process it using Net::HTTPResponse#read_body, if desired.
@@ -88,7 +93,7 @@ class WebServiceTestsController < ApplicationController
 
             raw_response = res.body
 
-            #response = JSON(res.body)["product"]
+            #response_product = JSON(res.body)["product"]
             #json_parsed_response = JSON.parse res.body
             #logger.debug("JSON RESPONSE:  " + json_parsed_response.to_s)
 
@@ -99,7 +104,6 @@ class WebServiceTestsController < ApplicationController
             #DateTime::now.seconds_since_midnight.to_s + ":  "
 
             return test_response
-            #return DateTime::now.to_s + "closer ... made the call ..."
         end
 
 end

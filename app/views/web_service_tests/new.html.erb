@@ -17,17 +17,17 @@
         </div>
     </div>
 
+    <%= render 'shared/error_messages' %>
+
     <%= form_for @web_service_test do |f| %>
 
     <div class="row form1">
         <div class="span5 b2">
             <fieldset><legend>request</legend>
-
             <div>
                 <%= f.label :name, "new test name", {class: "form1_label"}  %>
                 <%= f.text_field :name %>
             </div>
-            <br>
             <div>
                 <%= f.label :server, "server (example: 'http://localhost:3000')", {class: "form1_label"} %>
                 <%= f.text_field :server %>

@@ -1,0 +1,12 @@
+<% if @web_service_test.errors.any? %>
+	<div id="error_explanation">
+		<div class="alert alert-error">
+			The form contains <%= pluralize(@web_service_test.errors.count, "error") %>
+		</div>
+		<ul style="list-style-type:circle;">
+			<% @web_service_test.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
