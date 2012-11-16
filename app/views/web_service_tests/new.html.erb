@@ -7,16 +7,19 @@
 </style>
 
 <div id="my_page" style="margin-top:40px;background-color:#ffffff;">
+
     <div class="row">
         <div class="span12 b1">
             <h2 style="padding:10px;">RESTful service tester</h2>
         </div>
     </div>
 
+    <%= form_for @web_service_test do |f| %>
+
     <div class="row form1">
         <div class="span6 b2" style="">
             <fieldset><legend>request</legend>
-            <%= form_for @web_service_test do |f| %>
+
             <div>
                 <%= f.label :name, "give your test a better name!", {class: "form1_label"}  %>
                 <%= f.text_field :name %>
@@ -37,20 +40,28 @@
             </div>
             <br>
             <%= f.submit "Run Test", class: "btn btn-primary" %>
-            <% end %>
             </fieldset>
         </div>
         <div class="span5 b3" >
             <fieldset><legend>response</legend>
-            <%= form_tag %>
                 <%= label_tag :test_response, "response", {class: "form1_label"}  %>
-                <%= text_area_tag "response", @test_response[:response_text], {rows: 15} %>
+                <%= text_area_tag "test_response_text", @test_response[:response_text], {rows: 15} %>
                 <br>
                 <%= label_tag "status", "status", {class: "form1_label"} %>
                 <%= label_tag @test_response[:status] %>
                 <br>
-                <%= submit_tag "Clear", class: "btn" %>
+                <%= submit_tag "Clear", :onclick => "return clear_response();", class: "btn" %>
             </fieldset>
         </div>
     </div>
+
+    <% end %>
+
+    <script>
+    function clear_response() {
+        $('#test_response_text').val('');
+        return false;
+    }
+    </script>
+
 </div>

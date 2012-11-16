@@ -1,14 +1,19 @@
-class WebServiceTestsController < ApplicationController
 require 'net/http'
-    DefaultServer = "http://localhost:3000"
+
+class WebServiceTestsController < ApplicationController
+
+    DEFAULT_SERVER = "http://localhost:3000"
 
     def new
         logger.debug("'new' method called in #{self.controller_name}")
+
         @web_service_test = WebServiceTest.new
-        @web_service_test.name = "initial name"
+
+        @web_service_test.name = "WST-" + DateTime::now.strftime("%I:%M:%S %p")
+
         @web_service_test.test_method = "-- Select a method to test --"
         @web_service_test.mime_type = "-- Select a mime type --"
-        @web_service_test.server = DefaultServer
+        @web_service_test.server = DEFAULT_SERVER
         @web_service_test.resource = '/subscriptions/oldest'
 
         @test_method_list = ["-- Select a method to test --", "GET", "PUT"]
@@ -35,7 +40,15 @@ require 'net/http'
             wst.save
         end
 
-        redirect_to new_web_service_test_path()
+        @web_service_test = wst
+        @web_service_test.name = "WST-" + DateTime::now.strftime("%I:%M:%S %p")
+        @test_method_list = ["-- Select a method to test --", "GET", "PUT"]
+        @mime_type_list = ["-- Select a mime type --", "XML", "JSON"]
+
+        @test_response = session[:test_response] ||= {response_text: "will go here ..."}
+
+        render 'new'
+        #redirect_to new_web_service_test_path()
     end
 
     private
@@ -43,6 +56,8 @@ require 'net/http'
         #
         def make_request(in_web_service_test)
 
+            #c reate the target URI
+            #
             case in_web_service_test.mime_type
                 when 'JSON'
                     suffix = '.json'
@@ -54,6 +69,7 @@ require 'net/http'
 
             url = URI.parse(in_web_service_test.server + in_web_service_test.resource + suffix)
 
+            # create the proper request
             case in_web_service_test.test_method
                 when 'GET'
                     req = Net::HTTP::Get.new(url.path)

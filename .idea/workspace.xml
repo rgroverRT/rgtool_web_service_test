@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/web_service_tests_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/web_service_tests_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/web_service_tests/new.html.erb" afterPath="$PROJECT_DIR$/app/views/web_service_tests/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
     <ignored path="ToolWebServiceTester.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,19 +23,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="web_service_tests_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="web_service_tests_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/web_service_tests_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="56" selection-start="2547" selection-end="2547" vertical-scroll-proportion="0.7307153">
+            <state line="43" column="79" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="new.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="new.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/web_service_tests/new.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="47" selection-start="2029" selection-end="2029" vertical-scroll-proportion="-18.923077">
+            <state line="62" column="21" selection-start="2361" selection-end="2361" vertical-scroll-proportion="0.9257642">
               <folding />
             </state>
           </provider>
@@ -80,8 +78,8 @@
         <option value="$PROJECT_DIR$/app/controllers/test_response_controller.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/controllers/test_responses_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/web_service_tests/new.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/web_service_tests_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/web_service_tests/new.html.erb" />
       </list>
     </option>
   </component>
@@ -303,7 +301,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Debugger" />
+    <property name="options.lastSelected" value="preferences.sourceCode.Yaml" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
@@ -778,16 +776,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/web_service_tests/new.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/web_service_tests_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="47" selection-start="2029" selection-end="2029" vertical-scroll-proportion="-18.923077">
+        <state line="43" column="79" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/web_service_tests_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/web_service_tests/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="56" selection-start="2547" selection-end="2547" vertical-scroll-proportion="0.7307153">
+        <state line="62" column="21" selection-start="2361" selection-end="2361" vertical-scroll-proportion="0.9257642">
           <folding />
         </state>
       </provider>
