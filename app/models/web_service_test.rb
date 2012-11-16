@@ -1,4 +1,8 @@
 class WebServiceTest < ActiveRecord::Base
     #attr_accessible :name
-    #attr_accessible :test_method
+    #                :mime_type
+    #                :test_method
+    #                :server
+    #                :resource
+    #                :test_method
 end
