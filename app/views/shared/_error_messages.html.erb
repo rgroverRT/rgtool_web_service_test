@@ -10,3 +10,14 @@
 		</ul>
 	</div>
 <% end %>
+
+<% if !@connection_error.nil? %>
+        <div class="alert alert-error">
+            Remote connection failed:&nbsp;&nbsp;<%= @connection_error.to_s %>
+        </div>
+<% end %>
+<% if !@soft_connection_error.nil? %>
+    <div class="alert alert-warning">
+        Connected, but status not OK:&nbsp;&nbsp;<%= @soft_connection_error %>
+    </div>
+<% end %>

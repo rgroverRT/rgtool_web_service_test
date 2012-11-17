@@ -8,15 +8,13 @@
   /* NOTE:  Bootstrap is goofing up the text_area_tag "cols" with it's "content" def */
 </style>
 
+<div class="row">
+    <div class="span12 b1">
+        <h2 style="padding:40px 0px 20px 20px;">RESTful service tester</h2>
+    </div>
+</div>
 
 <div id="wst_form">
-
-    <div class="row">
-        <div class="span12 b1">
-            <h2 style="padding:10px;">RESTful service tester</h2>
-        </div>
-    </div>
-
     <%= render 'shared/error_messages' %>
 
     <%= form_for @web_service_test do |f| %>
