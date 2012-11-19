@@ -5,7 +5,7 @@ class WebServiceTestsController < ApplicationController
     DEFAULT_SERVER = "http://localhost:3000"
     DEFAULT_RESOURCE = '/subscriptions'     #/oldest'
     DEFAULT_METHOD =  "-- Select a method to test --"
-    METHOD_LIST = [DEFAULT_METHOD, "GET", "PUT"]
+    METHOD_LIST = [DEFAULT_METHOD, "GET", "POST", "PUT", "DELETE"]
 
     def new
         logger.debug("'new' method called in #{self.controller_name}")
@@ -17,7 +17,7 @@ class WebServiceTestsController < ApplicationController
         @web_service_test.server = DEFAULT_SERVER
         @web_service_test.resource = DEFAULT_RESOURCE
 
-        @test_method_list = METHOD_LIST #[DEFAULT_METHOD, "GET", "PUT"]
+        @test_method_list = METHOD_LIST
         @test_response = session[:test_response] ||= {response_text: "will go here ..."}
     end
 
@@ -102,6 +102,11 @@ class WebServiceTestsController < ApplicationController
                 when 'POST'
                     raise ArgumentError, "POST not supported"
                     # TODO need text input for the POST (or PUT) payload
+                when 'PUT'
+                    raise ArgumentError, "PUT not supported"
+                when 'DELETE'
+                    req = Net::HTTP::Delete.new(url.path)
+                        #Get.new(url.path)
                 else
                     raise ArgumentError, "select a supported method to test"
             end
